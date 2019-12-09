@@ -29,28 +29,20 @@ class Todoitem extends Component<ItemProps,ItemState> {
 	onDeletelist () {
 		this.props.onDeletelist(this.props.textId);
 	}
-	onUpdatelist () {
-		const content = this.state.content;
-		const { id } = this.props;
-		console.log(content);
-		console.log(id);
-		this.showModal();
-		
-		this.props.onUpdatelist({content, id});
-	}
 
-  showModal = () => {
-    this.setState({
-      show: true,
-		});
+  // showModal = () => {
+  //   this.setState({
+  //     show: true,
+	// 	});
 		// this.props.onDeletelist(this.props.textId)
-	};
-
+	// };
+  
 	handleOK = (event: any) => {
 		console.log(event);
     this.setState({
 			show: false
 		});
+		// this.getvalue(this.state.content);
 		// console.log(this.state.content);
 	}
 
@@ -67,7 +59,19 @@ class Todoitem extends Component<ItemProps,ItemState> {
 			content: event.target.value
 		})
 	}
-
+	onUpdatelist (event: any) {
+		const content = this.state.content;
+		const { id } = this.props;
+    this.setState({
+			show: true
+		});
+		this.setState({
+			content: event.target.value
+		});
+		this.props.onUpdatelist({content, id})
+		// console.log(id);
+		// console.log(content);
+	}
 	render() {
 		const text = this.props.text;
 		// const id = this.props.id;
@@ -82,7 +86,7 @@ class Todoitem extends Component<ItemProps,ItemState> {
           onOk={this.handleOK}
           onCancel={this.handleCancel}
         >
-					<Input onChange={this.getvalue}></Input>
+					<Input onChange={this.onUpdatelist}></Input>
         </Modal>
 					<Button type="danger" onClick={this.onDeletelist}>删除</Button>
 				</Row>

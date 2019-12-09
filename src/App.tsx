@@ -3,6 +3,7 @@ import "./App.scss";
 import Todolist from './Components/Todolist';
 import Todoadditem from './Components/Todoadditem'
 
+
 export type AppState = {
   id: string;
   text: string;
@@ -38,8 +39,30 @@ class App extends Component<AppItem> {
     const {listdata} = this.state;
     this.setState({listdata: listdata.filter(v => v.id !== textId)})
   }
-  onUpdate = () => {
-  
+  onUpdate = (res: {content: string, id: string}) => {
+    console.log('on update', res);
+    const { listdata } = this.state;
+    // const index = listdata.findIndex(v => v.id == res.id);
+
+    // 略繁琐
+    // this.setState({
+    //   listdata: [...listdata].map((item, i) => {
+    //     if (i === index) {
+    //       return {...listdata[index], text: res.content}
+    //     } else {
+    //       return item
+    //     }
+    //   })
+    // })
+    this.setState({
+      listdata: listdata.map(item => {
+        if (item.id === res.id) {
+          return {...item, text: res.content}
+        } else {
+          return item
+        }
+      })
+    })
   }
   onaddTodolist(text: string) {
     let {listdata} = this.state
@@ -53,7 +76,7 @@ class App extends Component<AppItem> {
   render () {
     return(
       <div className='content'>
-      <Todolist listdata={this.state.listdata} onDeletelist={this.onDelete} onUpdatelist={this.onUpdate}></Todolist>
+      <Todolist listdata={this.state.listdata} onDeletelist={this.onDelete} onUpdatelist={this.onUpdate.bind(this)}></Todolist>
       <Todoadditem addTodolist={this.onaddTodolist.bind(this)}></Todoadditem>
       </div>
     );
