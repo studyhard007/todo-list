@@ -20,7 +20,10 @@ class App extends Component<AppItem> {
       text: 'Study Typescript'
     }, {
       id: '2',
-      text: 'Studyhard React'
+      text: 'Study React'
+    }, {
+      id: '3',
+      text: 'Study Mobx'
     }]
   }
   // constructor(props: any) {

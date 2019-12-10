@@ -28,7 +28,12 @@ class Todoadditem extends Component<TodoadditemProps, TodoadditemState> {
    }
   addTodolist () {
     const data = this.state.data;
+    if (data.trim().length <= 0) {
+      alert('请输入代办事件...！');
+    }
+    else {
     this.props.addTodolist(data);
+  }
   }
 
   render() {
