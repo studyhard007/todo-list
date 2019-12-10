@@ -34,12 +34,15 @@ class Todoadditem extends Component<TodoadditemProps, TodoadditemState> {
     else {
     this.props.addTodolist(data);
   }
+  this.setState({
+    data: ''
+  });
   }
 
   render() {
     return (
       <div>
-      <Input onChange={this.getvalue}></Input>
+      <Input  placeholder='请输入代办事件...' value={this.state.data} onChange={this.getvalue}></Input>
       <Button type="primary" onClick={this.addTodolist}>添加</Button>
       </div>
     );

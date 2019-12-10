@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import "./App.scss";
 import Todolist from './Components/Todolist';
-import Todoadditem from './Components/Todoadditem'
-
+import Todoadditem from './Components/Todoadditem';
+import Todosearch from './Components/Todosearch'
 
 export type AppState = {
   id: string;
@@ -79,6 +79,7 @@ class App extends Component<AppItem> {
   render () {
     return(
       <div className='content'>
+      <Todosearch ></Todosearch>
       <Todolist listdata={this.state.listdata} onDeletelist={this.onDelete} handleOK={this.onUpdate.bind(this)}></Todolist>
       <Todoadditem addTodolist={this.onaddTodolist.bind(this)}></Todoadditem>
       </div>

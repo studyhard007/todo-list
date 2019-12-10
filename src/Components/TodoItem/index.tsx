@@ -79,7 +79,7 @@ class Todoitem extends Component<ItemProps,ItemState> {
 		const text = this.props.text;
 		// const id = this.props.id;
 		return (
-			<li>
+			<li className="none">
 				<Row>
 					<Col>{text}</Col>
 					<Button type="primary" onClick={this.showModal}>修改</Button>
