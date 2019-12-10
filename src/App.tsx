@@ -76,7 +76,7 @@ class App extends Component<AppItem> {
   render () {
     return(
       <div className='content'>
-      <Todolist listdata={this.state.listdata} onDeletelist={this.onDelete} onUpdatelist={this.onUpdate.bind(this)}></Todolist>
+      <Todolist listdata={this.state.listdata} onDeletelist={this.onDelete} handleOK={this.onUpdate.bind(this)}></Todolist>
       <Todoadditem addTodolist={this.onaddTodolist.bind(this)}></Todoadditem>
       </div>
     );

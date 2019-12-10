@@ -7,7 +7,7 @@ interface ItemProps {
 	id: string;
 	textId: string;
 	onDeletelist: (res: any) => any;
-	onUpdatelist: (res: { id: string, content: string}) => any;
+	handleOK: (res: {id: string, content: string}) => any;
 }
 
 interface ItemState {
@@ -24,26 +24,29 @@ class Todoitem extends Component<ItemProps,ItemState> {
 		}
 		this.onDeletelist = this.onDeletelist.bind(this);
 		this.getvalue = this.getvalue.bind(this);
-		this.onUpdatelist = this.onUpdatelist.bind(this);
+		// this.onUpdatelist = this.onUpdatelist.bind(this);
+		this.handleOK = this.handleOK.bind(this);
 	}
 	onDeletelist () {
 		this.props.onDeletelist(this.props.textId);
 	}
 
-  // showModal = () => {
-  //   this.setState({
-  //     show: true,
-	// 	});
-		// this.props.onDeletelist(this.props.textId)
-	// };
+  showModal = () => {
+    this.setState({
+      show: true,
+		});
+	};
   
-	handleOK = (event: any) => {
+	handleOK (event: any)  {
 		console.log(event);
     this.setState({
 			show: false
 		});
-		// this.getvalue(this.state.content);
-		// console.log(this.state.content);
+		const content = this.state.content;
+		const  id  = this.props.textId;
+		console.log(content);
+		console.log(id);
+    this.props.handleOK({content, id})
 	}
 
 	handleCancel = (event: any) => {
@@ -59,19 +62,19 @@ class Todoitem extends Component<ItemProps,ItemState> {
 			content: event.target.value
 		})
 	}
-	onUpdatelist (event: any) {
-		const content = this.state.content;
-		const { id } = this.props;
-    this.setState({
-			show: true
-		});
-		this.setState({
-			content: event.target.value
-		});
-		this.props.onUpdatelist({content, id})
-		// console.log(id);
-		// console.log(content);
-	}
+	// onUpdatelist (event: any) {
+	// 	const content = this.state.content;
+	// 	const { id } = this.props;
+  //   this.setState({
+	// 		show: true
+	// 	});
+	// 	this.setState({
+	// 		content: event.target.value
+	// 	});
+	// 	this.props.onUpdatelist({content, id})
+	// 	// console.log(id);
+	// 	// console.log(content);
+	// }
 	render() {
 		const text = this.props.text;
 		// const id = this.props.id;
@@ -79,14 +82,14 @@ class Todoitem extends Component<ItemProps,ItemState> {
 			<li>
 				<Row>
 					<Col>{text}</Col>
-					<Button type="primary" onClick={this.onUpdatelist}>修改</Button>
+					<Button type="primary" onClick={this.showModal}>修改</Button>
 					<Modal
           title="请输入修改内容"
           visible={this.state.show}
           onOk={this.handleOK}
           onCancel={this.handleCancel}
         >
-					<Input onChange={this.onUpdatelist}></Input>
+					<Input onChange={this.getvalue}></Input>
         </Modal>
 					<Button type="danger" onClick={this.onDeletelist}>删除</Button>
 				</Row>

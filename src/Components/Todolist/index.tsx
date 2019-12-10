@@ -5,7 +5,7 @@ import { AppState } from '../../App'
 type TodolistProps = {
   listdata: AppState[];
   onDeletelist: (res: any) => any;
-  onUpdatelist: (res: { id:string, content: string }) => any;
+  handleOK: (res: { id:string, content: string }) => any;
 }
 
 class Todolist extends Component<TodolistProps> {
@@ -24,7 +24,7 @@ class Todolist extends Component<TodolistProps> {
           key={index}
           textId= {listdata.id}
           onDeletelist={this.props.onDeletelist}
-          onUpdatelist={this.props.onUpdatelist}
+          handleOK={this.props.handleOK}
           ></Todoitem>
           );
          })
